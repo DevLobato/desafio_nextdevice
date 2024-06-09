@@ -1,0 +1,71 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  user_id          Int                @id @default(autoincrement())
+  name             String             @unique
+  type             String
+  password         String
+  User_Offers      User_Offers[]
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+  Registered_Book  Registered_Book[]
+  Registered_Offer Registered_Offer[]
+}
+
+model Offer {
+  offer_id         Int                @id @default(autoincrement())
+  status           String             @default("Pending")
+  value            String
+  User_Offers      User_Offers[]
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+  Registered_Offer Registered_Offer[]
+}
+
+model User_Offers {
+  user_id  Int
+  offer_id Int
+  users    User  @relation(fields: [user_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction)
+  offers   Offer @relation(fields: [offer_id], references: [offer_id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@unique([user_id, offer_id], map: "user_id_offer_id_unique")
+}
+
+model Book {
+  id               Int                @id @default(autoincrement())
+  title            String
+  author           String
+  gender           String
+  imgLink          String?
+  Registered_Book  Registered_Book[]
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+  Registered_Offer Registered_Offer[]
+}
+
+model Registered_Book {
+  user_id Int
+  book_id Int
+  users   User @relation(fields: [user_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction)
+  books   Book @relation(fields: [book_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@unique([user_id, book_id], map: "user_id_book_id_unique")
+}
+
+model Registered_Offer {
+  user_id  Int
+  book_id  Int
+  offer_id Int
+  users    User  @relation(fields: [user_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction)
+  books    Book  @relation(fields: [book_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  offers   Offer @relation(fields: [offer_id], references: [offer_id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@unique([user_id, book_id], map: "user_id_book_id_offer_id_unique")
+}
