@@ -23,3 +23,7 @@ $ npm run start:dev
 ## Anotações
 
 [Link do Notion](https://www.notion.so/Desafio-Next-Device-3bf9a01d82c046d2a5a8d06d9814afac?pvs=4)
+
+## Documentação API - Swagger
+
+[API Next](http://localhost:3000/api)
