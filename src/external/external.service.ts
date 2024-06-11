@@ -14,12 +14,10 @@ export class ExternalService {
   ) {}
 
   async getBooks(body: { search: string; terms: string }) {
-    const apiKey = process.env.API_KEY;
-
     try {
       const { data } = await firstValueFrom(
         this.httpService.get(
-          `https://www.googleapis.com/books/v1/volumes?q=${body.search}+${body.terms}&maxresults=10&key=${apiKey}`,
+          `https://www.googleapis.com/books/v1/volumes?q=${body.search}+${body.terms}&maxresults=10&key=${process.env.API_KEY}`,
         ),
       );
 
