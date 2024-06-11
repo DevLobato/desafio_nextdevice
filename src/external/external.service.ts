@@ -12,16 +12,14 @@ export class ExternalService {
     private httpService: HttpService,
     private prisma: PrismaService,
   ) {}
-  /* TODO:
-    - RF09 'External' Google Books API, busca os Livros para cadastrar no sistema [ Ok ]
-    - RF10 'External' sistema deve armazenar as imagens dos livros no S3 [ ]
-  */
 
-  async getBooks(search: string, terms: string) {
+  async getBooks(body: { search: string; terms: string }) {
+    const apiKey = process.env.API_KEY;
+
     try {
       const { data } = await firstValueFrom(
         this.httpService.get(
-          `https://www.googleapis.com/books/v1/volumes?q=${search}+${terms}&maxresults=10&key=AIzaSyAuy4JPBE-LPJGZkE6IPi9Lk8kdzrR_NSk`,
+          `https://www.googleapis.com/books/v1/volumes?q=${body.search}+${body.terms}&maxresults=10&key=${apiKey}`,
         ),
       );
 

@@ -8,10 +8,22 @@ import { BooksModule } from './books/books.module';
 import { AuthModule } from './auth/auth.module';
 import { ExternalModule } from './external/external.module';
 import { HttpModule } from '@nestjs/axios';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
-  imports: [PrismaModule, UsersModule, OffersModule, BooksModule, AuthModule, ExternalModule, HttpModule],
+  imports: [
+    PrismaModule,
+    UsersModule,
+    OffersModule,
+    BooksModule,
+    AuthModule,
+    ExternalModule,
+    HttpModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
+})
+@Module({
+  imports: [ConfigModule.forRoot({ isGlobal: true })],
 })
 export class AppModule {}
