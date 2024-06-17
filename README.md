@@ -27,3 +27,19 @@ $ npm run start:dev
 ## Documentação API - Swagger
 
 [API Next](http://localhost:3000/api)
+
+## Requisitos Funcionais
+
+- RF01 Login e SingUp sera realizado pelo authService [OK]
+- RF02 Usuario, se Vendedor, cadastra Livro [OK]
+- Utilizar os recursos de Volume e Estante, do Google Books API
+  - https://developers.google.com/books/docs/v1/using?hl=pt-br#WorkingVolumes
+- RF03 Comprador visualiza os Livros [ ] (Tratar no Front)
+- RF03 Comprador realiza Oferta no Livro [OK]
+- RF04 Comprador acompanha status do Livro [] (Tratar no Front)
+- RF05 Vendedor aprova ou recusa a Oferta [ ]
+- RF06 Comprador filtra os tipos de Livro [ ]
+- RF07 Se o Livro cadastrado receber a primeira oferta, o Leilao e iniciado [ ]
+- RF08 Apos uma Oferta ser aprovada, o Leilao deve ser encerrado [ ]
+- RF09 'External' Google Books API, busca os Livros para cadastrar no sistema [OK]
+- RF10 'External' sistema deve armazenar as imagens dos livros no S3 [ ]
