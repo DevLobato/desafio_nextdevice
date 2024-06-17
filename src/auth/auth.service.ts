@@ -7,7 +7,7 @@ import { PrismaService } from 'src/prisma/prisma.service';
 export class AuthService {
   constructor(private prisma: PrismaService) {}
 
-  async create(data: { name: string; type: string; password: string }) {
+  async signup(data: { name: string; type: string; password: string }) {
     const isRegistered = await this.prisma.user.findUnique({
       where: { name: data.name, type: data.type, password: data.password },
     });
@@ -20,10 +20,9 @@ export class AuthService {
           password: data.password,
         },
       });
-    else return 'Already registered!';
   }
 
-  async login(data: { name: string; password: string }) {
+  async signin(data: { name: string; password: string }) {
     const isRegistered = await this.prisma.user.findUnique({
       where: { name: data.name, password: data.password },
     });
@@ -31,8 +30,4 @@ export class AuthService {
     if (!isRegistered) return 'Not registered yet!';
     else return 'Autenticated!';
   }
-
-  /* TODO:
-    - RF01 Login e SingUp sera realizado pelo authService [OK]
-  */
 }

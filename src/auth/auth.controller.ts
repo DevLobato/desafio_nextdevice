@@ -18,12 +18,12 @@ export class AuthController {
 
   @Post('/signup')
   create(@Body() body: { name: any; type: any; password: any }) {
-    return this.authService.create(body);
+    return this.authService.signup(body);
   }
 
   @Post('/signin')
   login(@Body() body: { name: any; password: any }) {
-    return this.authService.login(body);
+    return this.authService.signin(body);
   }
 
   @Get()
