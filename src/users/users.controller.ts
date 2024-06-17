@@ -17,24 +17,8 @@ import { ApiTags } from '@nestjs/swagger';
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
-  // TODO:
   // - @ApiResponse({ status: 201, description: 'The record has been successfully created.'})
   // - @ApiResponse({ status: 403, description: 'Forbidden.'})
-  @Post('/signup')
-  signup(@Body() body: { name: any; type: any; password: any }) {
-    return this.usersService.signup(body);
-  }
-
-  @Post('/signin')
-  signin(@Body() body: { name: any; password: any }) {
-    return this.usersService.signin(body);
-  }
-
-  @Post('/register_books')
-  registerBook(@Body() body: { name: any; password: any; title: any }) {
-    return this.usersService.registerBooks(body);
-  }
-
   @Post('/register_offers')
   registerOffer(
     @Body() body: { name: any; password: any; title: any; value: any },
@@ -47,9 +31,9 @@ export class UsersController {
     return this.usersService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.usersService.findOne(+id);
+  @Get()
+  findOne(@Body() body: { name: string; password: string }) {
+    return this.usersService.findOne(body);
   }
 
   @Patch(':id')
