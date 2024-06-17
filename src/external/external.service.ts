@@ -17,7 +17,7 @@ export class ExternalService {
     try {
       const { data } = await firstValueFrom(
         this.httpService.get(
-          `https://www.googleapis.com/books/v1/volumes?q=${body.search}+${body.terms}&maxresults=10&key=${process.env.API_KEY}`,
+          `${process.env.API_URL}volumes?q=${body.search}+${body.terms}&maxresults=10&key=${process.env.API_KEY}`,
         ),
       );
 
