@@ -23,9 +23,4 @@ export class OffersService {
   remove(id: number) {
     return `This action removes a #${id} offer`;
   }
-
-  /* TODO:
-    - RF07 Se o Livro cadastrado receber a primeira oferta, o Leilao e iniciado [ ]
-    - RF08 Apos uma Oferta ser aprovada, o Leilao deve ser encerrado [ ]
-  */
 }
