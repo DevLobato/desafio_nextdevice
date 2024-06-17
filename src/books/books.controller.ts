@@ -18,9 +18,14 @@ export class BooksController {
   constructor(private booksService: BooksService) {}
 
   // Rota para buscar na API do Google Books, e cadastrar 10 livros
+  @Post('/register_books')
+  registerBook(@Body() body: { name: any; password: any; title: any }) {
+    return this.booksService.registerBooks(body);
+  }
+
   @Post()
-  create(@Body() search: string, terms: string) {
-    return this.booksService.getBooks(search, terms);
+  async getBooks(@Body() body: { search: string; terms: string }) {
+    return this.booksService.getBooks(body);
   }
 
   @Get()
